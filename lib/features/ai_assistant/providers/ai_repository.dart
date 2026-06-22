@@ -2,31 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final aiRepositoryProvider = FutureProvider((ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  final apiKey = prefs.getString('gemini_api_key') ?? '';
-  return AIRepository(apiKey);
-});
+final aiRepositoryProvider = Provider((ref) => AIRepository());
 
 class AIRepository {
-  final String _apiKey;
-  late final GenerativeModel? _model;
-
-  AIRepository(this._apiKey) {
-    if (_apiKey.isNotEmpty) {
-      _model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: _apiKey);
-    } else {
-      _model = null;
-    }
-  }
-
   Future<String> askQuestion(String prompt) async {
-    if (_model == null) {
-      return 'API Key not found! Please go to Settings and enter your Gemini API Key.';
+    final prefs = await SharedPreferences.getInstance();
+    final apiKey = prefs.getString('gemini_api_key') ?? '';
+
+    if (apiKey.isEmpty) {
+      return 'API Key not found! Please add your Gemini API Key inside Settings to unlock the AI capabilities.';
     }
     
     try {
-      final response = await _model!.generateContent([Content.text(prompt)]);
+      final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+      final response = await model.generateContent([Content.text(prompt)]);
       return response.text ?? 'I could not generate an answer.';
     } catch (e) {
       return 'Error: $e';
