@@ -34,25 +34,29 @@ class _TopicReaderScreenState extends ConsumerState<TopicReaderScreen> {
     }
 
     final prompt = '''
-Generate a comprehensive, expert-level Markdown tutorial about "${widget.topic.title}".
+Generate a comprehensive, expert-level Markdown tutorial about "\${widget.topic.title}".
 You MUST use exactly this structure and fill it out completely with rich code examples:
-# ${widget.topic.title}
-## 1. What is it?
-## 2. Why use it?
-## 3. Where is it used?
-## 4. Real-world examples
-## 5. Syntax
-## 6. Beginner Examples
-## 7. Intermediate Examples
-## 8. Advanced Examples
-## 9. Common Mistakes
-## 10. Best Practices
-## 11. Industry Usage
-## 12. Interview Questions
-## 13. Coding Exercises
-## 14. Quiz
-## 15. Mini Project
-## 16. Notes
+# \${widget.topic.title}
+## 1. Introduction
+## 2. Why Learn This Topic
+## 3. Where It Is Used
+## 4. Industry Applications
+## 5. Detailed Explanation
+## 6. Syntax Explanation
+## 7. Beginner Examples
+## 8. Intermediate Examples
+## 9. Advanced Examples
+## 10. Practice Programs
+## 11. Output Explanation
+## 12. Common Errors
+## 13. Best Practices
+## 14. Coding Challenges
+## 15. Quiz Questions
+## 16. Interview Questions
+## 17. Assignment
+## 18. Mini Project
+## 19. Notes
+## 20. Revision Points
 ''';
 
     final result = await ref.read(aiRepositoryProvider).askQuestion(prompt);
