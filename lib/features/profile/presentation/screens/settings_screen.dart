@@ -46,6 +46,7 @@ class SettingsScreen extends ConsumerWidget {
               },
               activeColor: AppColors.primary,
             ),
+          ),
           ListTile(
             leading: const Icon(Icons.key),
             title: const Text('Set Gemini API Key'),
