@@ -116,42 +116,42 @@ class CurriculumData {
       'title': 'React JS Complete Masterclass',
       'category': 'Frontend',
       'desc': 'Modern declarative UI library.',
-      'modules': List.generate(20, (index) => 'React Module \${index + 1}')
+      'modules': List.generate(20, (index) => 'React Module ${index + 1}')
     },
     {
       'id': 'nodejs',
       'title': 'Node JS Complete Masterclass',
       'category': 'Backend',
       'desc': 'Server-side JavaScript environment.',
-      'modules': List.generate(20, (index) => 'Node JS Module \${index + 1}')
+      'modules': List.generate(20, (index) => 'Node JS Module ${index + 1}')
     },
     {
       'id': 'python',
       'title': 'Python Complete Masterclass',
       'category': 'Programming',
       'desc': 'Versatile data and web programming language.',
-      'modules': List.generate(25, (index) => 'Python Module \${index + 1}')
+      'modules': List.generate(25, (index) => 'Python Module ${index + 1}')
     },
     {
       'id': 'c',
       'title': 'C Programming Masterclass',
       'category': 'Programming',
       'desc': 'Foundation of modern computing.',
-      'modules': List.generate(20, (index) => 'C Module \${index + 1}')
+      'modules': List.generate(20, (index) => 'C Module ${index + 1}')
     },
     {
       'id': 'cpp',
       'title': 'C++ Programming Masterclass',
       'category': 'Programming',
       'desc': 'High-performance system language.',
-      'modules': List.generate(20, (index) => 'C++ Module \${index + 1}')
+      'modules': List.generate(20, (index) => 'C++ Module ${index + 1}')
     },
     {
       'id': 'flutter',
       'title': 'Flutter Complete Masterclass',
       'category': 'Mobile',
       'desc': 'Cross-platform app development.',
-      'modules': List.generate(25, (index) => 'Flutter Module \${index + 1}')
+      'modules': List.generate(25, (index) => 'Flutter Module ${index + 1}')
     }
   ];
 }

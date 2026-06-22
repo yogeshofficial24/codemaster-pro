@@ -11,7 +11,7 @@ class DatabaseSeeder {
 
     debugPrint("Clearing old data...");
     
-    debugPrint("Seeding \${CurriculumData.masterCourses.length} Master Courses...");
+    debugPrint("Seeding ${CurriculumData.masterCourses.length} Master Courses...");
 
     for (var courseMap in CurriculumData.masterCourses) {
       final String cId = courseMap['id'];
@@ -36,7 +36,7 @@ class DatabaseSeeder {
           id: mId,
           courseId: cId,
           title: modName,
-          description: 'Master \${courseMap['title']} concepts focusing on \$modName.',
+          description: "Master ${courseMap['title']} concepts focusing on \$modName.",
           orderIndex: modIndex,
           totalTopics: 3, // 3 standard AI generated topics per module
         ).toMap());
@@ -67,6 +67,6 @@ class DatabaseSeeder {
       }
     }
     
-    debugPrint("Finished Seeding Master Database with \${CurriculumData.masterCourses.length} Languages!");
+    debugPrint("Finished Seeding Master Database with ${CurriculumData.masterCourses.length} Languages!");
   }
 }

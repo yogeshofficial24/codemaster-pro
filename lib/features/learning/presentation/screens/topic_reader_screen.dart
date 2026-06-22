@@ -34,9 +34,9 @@ class _TopicReaderScreenState extends ConsumerState<TopicReaderScreen> {
     }
 
     final prompt = '''
-Generate a comprehensive, expert-level Markdown tutorial about "\${widget.topic.title}".
+Generate a comprehensive, expert-level Markdown tutorial about "${widget.topic.title}".
 You MUST use exactly this structure and fill it out completely with rich code examples:
-# \${widget.topic.title}
+# ${widget.topic.title}
 ## 1. Introduction
 ## 2. Why Learn This Topic
 ## 3. Where It Is Used
