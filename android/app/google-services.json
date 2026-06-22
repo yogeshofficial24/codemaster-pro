@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523662016575",
+    "project_id": "codemaster-pro-8417c",
+    "storage_bucket": "codemaster-pro-8417c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523662016575:android:0baa90eeb38e3f4547388a",
+        "android_client_info": {
+          "package_name": "com.codemaster.codemaster_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTOVenM5nUGfi-3bV8or4h83fiz1BHImA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
