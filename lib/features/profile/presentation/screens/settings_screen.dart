@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/features/auth/providers/auth_controller.dart';
 import 'package:codemaster_pro/features/auth/presentation/screens/login_screen.dart';
@@ -45,6 +46,13 @@ class SettingsScreen extends ConsumerWidget {
               },
               activeColor: AppColors.primary,
             ),
+          ListTile(
+            leading: const Icon(Icons.key),
+            title: const Text('Set Gemini API Key'),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: () {
+              _showApiKeyDialog(context);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.language),
@@ -117,6 +125,43 @@ class SettingsScreen extends ConsumerWidget {
           fontSize: 14,
         ),
       ),
+    );
+  }
+
+  void _showApiKeyDialog(BuildContext context) {
+    final TextEditingController _keyController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.backgroundDark,
+          title: const Text('Gemini API Key'),
+          content: TextField(
+            controller: _keyController,
+            decoration: const InputDecoration(
+              hintText: 'Paste API Key here...',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString('gemini_api_key', _keyController.text);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('API Key Saved!')));
+                }
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
