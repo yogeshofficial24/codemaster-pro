@@ -197,6 +197,18 @@ class CurriculumData {
       'category': 'Mobile',
       'desc': 'Cross-platform app development.',
       'modules': List.generate(25, (index) => 'Flutter Module ${index + 1}')
+    },
+    {
+      'id': 'hr_interview',
+      'title': 'HR & General Interview Preparation',
+      'category': 'Interview Prep',
+      'desc': 'Master the general HR and behavioral interview questions.',
+      'modules': [
+        'Introduction to HR Interviews', 'Tell Me About Yourself', 'Strengths and Weaknesses',
+        'Why Should We Hire You?', 'Career Goals', 'Handling Pressure & Stress',
+        'Teamwork & Collaboration', 'Behavioral Questions', 'Salary Expectations',
+        'Questions to Ask the Interviewer', 'Mock Interview Practice'
+      ]
     }
   ];
 }
