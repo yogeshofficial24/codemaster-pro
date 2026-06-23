@@ -31,10 +31,16 @@ class CurriculumData {
       'category': 'Frontend',
       'desc': 'Interactive programming for the web.',
       'modules': [
-        'Introduction', 'Variables', 'Data Types', 'Operators', 'Conditions',
-        'Loops', 'Functions', 'Arrays', 'Objects', 'DOM', 'Events', 'ES6',
-        'Classes', 'Async JavaScript', 'Promises', 'Fetch API', 'Local Storage',
-        'Error Handling', 'Modules', 'Weather App Project'
+        'Introduction to JavaScript', 'Setting Up Environment', 'Variables', 'Data Types', 'Operators',
+        'User Input & Output', 'Conditional Statements', 'Loops', 'Functions', 'Arrays',
+        'Objects', 'DOM Manipulation', 'Events', 'Forms Validation', 'Local Storage',
+        'Session Storage', 'JSON', 'Error Handling', 'Modules', 'Debugging Techniques',
+        'ES6 Features', 'Classes & OOP', 'Inheritance', 'Closures', 'Scope & Hoisting',
+        'Callbacks', 'Promises', 'Async / Await', 'Fetch API', 'REST API Consumption',
+        'Advanced Array Methods', 'Functional Programming', 'Event Loop', 'Call Stack', 'Memory Management',
+        'Browser Rendering', 'Performance Optimization', 'Security Best Practices', 'Authentication Concepts', 'Real-Time Applications',
+        'Design Patterns', 'Dependency Injection', 'WebSockets', 'Service Workers', 'Progressive Web Apps',
+        'Advanced Security', 'Micro Frontend Concepts', 'Testing', 'Architecture Patterns', 'Enterprise JavaScript'
       ]
     },
     {
