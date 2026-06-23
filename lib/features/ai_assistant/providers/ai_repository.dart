@@ -11,7 +11,7 @@ class AIRepository {
     final apiKey = part1 + part2;
 
     try {
-      final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+      final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
       final response = await model.generateContent([Content.text(prompt)]);
       return response.text ?? 'I could not generate an answer.';
     } catch (e) {
@@ -25,7 +25,7 @@ class AIRepository {
   }
 
   Future<String> evaluateInterviewAnswer(String question, String answer) async {
-    final prompt = 'As an expert technical interviewer, evaluate this answer to the following question. \\nQuestion: \$question\\nAnswer: \$answer\\n\\nProvide a brief evaluation, a score out of 10, and what could be improved.';
+    final prompt = 'As an expert technical interviewer, evaluate this answer to the following question. \\nQuestion: $question\\nAnswer: $answer\\n\\nProvide a brief evaluation, a score out of 10, and what could be improved.';
     return await askQuestion(prompt);
   }
 }

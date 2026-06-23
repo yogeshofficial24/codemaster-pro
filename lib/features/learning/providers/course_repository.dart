@@ -14,8 +14,9 @@ final modulesProvider = StreamProvider.family<List<ModuleModel>, String>((ref, c
   return ref.watch(courseRepositoryProvider).getModules(courseId);
 });
 
-final topicsProvider = StreamProvider.family<List<TopicModel>, Map<String, String>>((ref, ids) {
-  return ref.watch(courseRepositoryProvider).getTopics(ids['courseId']!, ids['moduleId']!);
+final topicsProvider = StreamProvider.family<List<TopicModel>, String>((ref, idPair) {
+  final parts = idPair.split('::');
+  return ref.watch(courseRepositoryProvider).getTopics(parts[0], parts[1]);
 });
 
 class CourseRepository {

@@ -29,28 +29,28 @@ class DatabaseSeeder {
 
       int modIndex = 1;
       for (var modName in moduleNames) {
-        final String mId = 'mod_\$modIndex';
+        final String mId = 'mod_$modIndex';
         final modRef = courseRef.collection('modules').doc(mId);
         
         await modRef.set(ModuleModel(
           id: mId,
           courseId: cId,
           title: modName,
-          description: "Master ${courseMap['title']} concepts focusing on \$modName.",
+          description: "Master ${courseMap['title']} concepts focusing on $modName.",
           orderIndex: modIndex,
           totalTopics: 3, // 3 standard AI generated topics per module
         ).toMap());
 
         // We automatically generate 3 sub-topics per module for the AI to elaborate on
         final standardTopics = [
-          'Theory & Fundamentals of \$modName',
-          'Code Examples & Patterns for \$modName',
-          'Advanced Use Cases for \$modName',
+          'Theory & Fundamentals of $modName',
+          'Code Examples & Patterns for $modName',
+          'Advanced Use Cases for $modName',
         ];
 
         int topIndex = 1;
         for (var topicTitle in standardTopics) {
-          final String tId = 't_\$topIndex';
+          final String tId = 't_$topIndex';
           final topRef = modRef.collection('topics').doc(tId);
           
           await topRef.set(TopicModel(

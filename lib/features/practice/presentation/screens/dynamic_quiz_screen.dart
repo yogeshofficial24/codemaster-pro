@@ -33,7 +33,7 @@ class _DynamicQuizScreenState extends ConsumerState<DynamicQuizScreen> {
 
   Future<void> _generateQuiz() async {
     final prompt = '''
-Generate a 10-question multiple-choice quiz about \${widget.course.title}.
+Generate a 10-question multiple-choice quiz about ${widget.course.title}.
 Output ONLY a valid JSON array of objects, with no markdown formatting or backticks.
 Each object must have exactly these keys:
 - "questionText" (string)
@@ -76,7 +76,7 @@ Each object must have exactly these keys:
     } catch (e) {
       if (mounted) {
         setState(() {
-          _error = 'Failed to generate quiz properly. Please try again.\\n\\nDetails: \$e';
+          _error = 'Failed to generate quiz properly. Please try again.\\n\\nDetails: $e';
           _isLoading = false;
         });
       }
@@ -113,7 +113,7 @@ Each object must have exactly these keys:
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('\${widget.course.title} Quiz'),
+        title: Text('${widget.course.title} Quiz'),
       ),
       body: _isLoading
           ? Center(
@@ -172,7 +172,7 @@ Each object must have exactly these keys:
           ),
           const SizedBox(height: 16),
           Text(
-            'Question \${_currentIndex + 1} of \${_questions.length}',
+            'Question ${_currentIndex + 1} of ${_questions.length}',
             style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 24),
@@ -271,12 +271,12 @@ Each object must have exactly these keys:
             ),
             const SizedBox(height: 16),
             Text(
-              'You scored \$_score out of \${_questions.length}',
+              'You scored $_score out of ${_questions.length}',
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 8),
             Text(
-              '\${percentage.toStringAsFixed(1)}%',
+              '${percentage.toStringAsFixed(1)}%',
               style: TextStyle(
                 fontSize: 32, 
                 fontWeight: FontWeight.bold, 

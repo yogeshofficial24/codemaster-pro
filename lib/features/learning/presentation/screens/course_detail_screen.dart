@@ -33,7 +33,7 @@ class CourseDetailScreen extends ConsumerWidget {
               final module = modules[index];
               
               // Watch topics for this module to display them
-              final topicsAsync = ref.watch(topicsProvider({'courseId': course.id, 'moduleId': module.id}));
+              final topicsAsync = ref.watch(topicsProvider('\${course.id}::\${module.id}'));
               
               return Card(
                 margin: const EdgeInsets.only(bottom: 16),
