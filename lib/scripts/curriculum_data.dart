@@ -24,10 +24,16 @@ class CurriculumData {
       'category': 'Frontend',
       'desc': 'Style the web from scratch.',
       'modules': [
-        'Introduction to CSS', 'Selectors', 'Colors', 'Backgrounds', 'Borders',
-        'Margin', 'Padding', 'Box Model', 'Typography', 'Display', 'Position',
-        'Flexbox', 'Grid', 'Responsive Design', 'Media Queries', 'Animations',
-        'Transitions', 'Variables', 'Modern CSS', 'Dashboard Project'
+        'Introduction to CSS', 'CSS Syntax', 'Ways to Apply CSS', 'Selectors', 'Colors',
+        'Backgrounds', 'Borders', 'Width and Height', 'Margin', 'Padding',
+        'Box Model', 'Typography', 'Text Styling', 'Display Property', 'Positioning',
+        'Float & Clear', 'Overflow', 'Z-Index', 'Pseudo Classes', 'Pseudo Elements',
+        'Flexbox Introduction', 'Flexbox Alignment', 'CSS Grid Introduction', 'Advanced Grid Layouts', 'Media Queries',
+        'CSS Variables', 'Transitions', 'Animations', 'Transformations', 'Modern Layout Systems',
+        'Responsive Design Systems', 'Mobile First Development', 'CSS Architecture', 'CSS Performance Optimization', 'CSS Accessibility',
+        'Dark Mode Implementation', 'Glassmorphism Design', 'Neumorphism Design', 'CSS for WordPress Themes', 'Enterprise UI Systems',
+        'Advanced Animations', 'CSS Design Systems', 'Utility First CSS Concepts', 'Tailwind CSS Fundamentals', 'CSS Framework Architecture',
+        'Cross Browser Compatibility', 'Advanced Responsive Strategies', 'CSS Debugging Techniques', 'Future of CSS', 'Enterprise Frontend Styling'
       ]
     },
     {
