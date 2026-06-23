@@ -73,7 +73,7 @@ class UpdateService {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('A new version of CodeMaster Pro is available!\\n\\nWhat\\'s New:'),
+                const Text("A new version of CodeMaster Pro is available!\\n\\nWhat's New:"),
                 const SizedBox(height: 8),
                 Text(releaseNotes, style: const TextStyle(color: Colors.grey)),
               ],
