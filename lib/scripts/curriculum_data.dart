@@ -144,12 +144,16 @@ class CurriculumData {
       'category': 'Design',
       'desc': 'Design principles and prototyping.',
       'modules': [
-        'Introduction', 'UX Principles', 'Design Thinking', 'User Research',
-        'Personas', 'User Journey', 'Information Architecture', 'Wireframing',
-        'Low Fidelity Design', 'High Fidelity Design', 'Design Systems',
-        'Typography', 'Color Theory', 'Accessibility', 'Mobile Design',
-        'Web Design', 'Prototyping', 'Usability Testing', 'Portfolio Building',
-        'Complete App Design Project'
+        'Introduction to UI/UX', 'Design Fundamentals', 'Design Thinking', 'User-Centered Design', 'User Research',
+        'Personas', 'User Journey Mapping', 'Information Architecture', 'User Flows', 'UX Writing',
+        'Wireframing Basics', 'Digital Wireframing', 'Figma Introduction', 'Figma Components', 'Auto Layout',
+        'Typography', 'Color Theory', 'Iconography', 'Visual Hierarchy', 'Responsive Design',
+        'Design Systems', 'UI Kits', 'Advanced Prototyping', 'Mobile App Design', 'Web Application Design',
+        'Ecommerce UX', 'Accessibility Design', 'Interaction Design', 'Usability Testing', 'UX Metrics',
+        'Product Design Process', 'Design Audits', 'Heuristic Evaluation', 'A/B Testing', 'UX Strategy',
+        'Business Goals & UX', 'Stakeholder Communication', 'Design Documentation', 'Team Collaboration', 'Agile UX Design',
+        'Enterprise Design Systems', 'SaaS Product Design', 'Dashboard UX', 'AI Product UX', 'UX for ERP Systems',
+        'UX for CRM Platforms', 'Advanced Research Methods', 'Product Thinking', 'Design Leadership', 'Future of UX Design'
       ]
     },
     {
