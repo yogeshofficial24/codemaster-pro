@@ -36,13 +36,15 @@ class DashboardScreen extends ConsumerWidget {
                             'Hello $name 👋',
                             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: AppColors.textPrimaryDark,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Ready to build the future?',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondaryDark),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : Colors.grey[600],
+                            ),
                           ),
                         ],
                       ),
@@ -51,7 +53,7 @@ class DashboardScreen extends ConsumerWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withAlpha(80),
+                              color: AppColors.primary.withOpacity(0.5),
                               blurRadius: 15,
                               spreadRadius: 2,
                             ),
@@ -59,7 +61,7 @@ class DashboardScreen extends ConsumerWidget {
                         ),
                         child: CircleAvatar(
                           radius: 26,
-                          backgroundColor: AppColors.surfaceDark,
+                          backgroundColor: Theme.of(context).colorScheme.surface,
                           backgroundImage: user?.profilePicture.isNotEmpty == true ? NetworkImage(user!.profilePicture) : null,
                           child: user?.profilePicture.isEmpty == true ? const Icon(Icons.person, color: AppColors.secondary) : null,
                         ),
@@ -106,14 +108,14 @@ class DashboardScreen extends ConsumerWidget {
                   ),
 
                   const SizedBox(height: 32),
-                  _buildStatsSection(xp, courses),
+                  _buildStatsSection(context, xp, courses),
                   const SizedBox(height: 32),
                   Text(
                     'Learning Statistics',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  _buildLearningStats(courses),
+                  _buildLearningStats(context, courses),
                 ],
               ),
             );
@@ -133,7 +135,11 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStatsSection(int xp, int courses) {
+  Widget _buildStatsSection(BuildContext context, int xp, int courses) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? AppColors.textSecondaryDark : Colors.grey[700];
+    final valueColor = Theme.of(context).colorScheme.onSurface;
+
     return Row(
       children: [
         Expanded(
@@ -143,8 +149,8 @@ class DashboardScreen extends ConsumerWidget {
               children: [
                 const Icon(Icons.local_fire_department, color: AppColors.accent, size: 36),
                 const SizedBox(height: 12),
-                const Text('Streak', style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.textSecondaryDark)),
-                const Text('1 Days', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                Text('Streak', style: TextStyle(fontWeight: FontWeight.w600, color: textColor)),
+                Text('1 Days', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: valueColor)),
               ],
             ),
           ),
@@ -157,8 +163,8 @@ class DashboardScreen extends ConsumerWidget {
               children: [
                 const Icon(Icons.star, color: AppColors.warning, size: 36),
                 const SizedBox(height: 12),
-                const Text('XP Earned', style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.textSecondaryDark)),
-                Text('$xp', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                Text('XP Earned', style: TextStyle(fontWeight: FontWeight.w600, color: textColor)),
+                Text('$xp', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: valueColor)),
               ],
             ),
           ),
@@ -167,32 +173,41 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildLearningStats(int courses) {
+  Widget _buildLearningStats(BuildContext context, int courses) {
     return Column(
       children: [
-        _buildStatRow('Languages Started', '1', AppColors.secondary),
+        _buildStatRow(context, 'Languages Started', '1', AppColors.secondary),
         const SizedBox(height: 12),
-        _buildStatRow('Courses Completed', '$courses', AppColors.success),
+        _buildStatRow(context, 'Courses Completed', '$courses', AppColors.success),
         const SizedBox(height: 12),
-        _buildStatRow('Challenges Solved', '0', AppColors.primary),
+        _buildStatRow(context, 'Challenges Solved', '0', AppColors.primary),
         const SizedBox(height: 12),
-        _buildStatRow('Interview Readiness', '10%', AppColors.accent),
+        _buildStatRow(context, 'Interview Readiness', '10%', AppColors.accent),
       ],
     );
   }
 
-  Widget _buildStatRow(String title, String value, Color color) {
+  Widget _buildStatRow(BuildContext context, String title, String value, Color color) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
-        color: AppColors.surfaceDark,
+        color: isDark ? AppColors.surfaceDark : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withAlpha(30)),
+        border: Border.all(color: color.withOpacity(0.3)),
+        boxShadow: isDark ? [] : [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+          Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Theme.of(context).colorScheme.onSurface)),
           Text(value, style: TextStyle(fontWeight: FontWeight.bold, color: color, fontSize: 18)),
         ],
       ),

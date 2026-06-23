@@ -10,10 +10,13 @@ class PracticeDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Practice & Prepare'),
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),

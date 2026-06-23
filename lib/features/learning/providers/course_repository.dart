@@ -3,6 +3,7 @@ import 'package:codemaster_pro/models/course_model.dart';
 import 'package:codemaster_pro/models/module_model.dart';
 import 'package:codemaster_pro/models/topic_model.dart';
 import 'package:codemaster_pro/scripts/curriculum_data.dart';
+import 'package:codemaster_pro/scripts/content_generator.dart';
 
 final courseRepositoryProvider = Provider((ref) => CourseRepository());
 
@@ -80,7 +81,7 @@ class CourseRepository {
             id: 'top_0',
             moduleId: moduleId,
             title: moduleTitle,
-            contentMarkdown: _generateDefaultContent(moduleTitle),
+            contentMarkdown: ContentGenerator.generateContent(courseId, moduleTitle),
             orderIndex: 0,
             xpReward: 10,
           ),
@@ -88,34 +89,6 @@ class CourseRepository {
       }
     }
     yield topicModels;
-  }
-
-  String _generateDefaultContent(String title) {
-    return '''
-# \$title
-
-Welcome to this comprehensive guide on **\$title**. This module is designed to give you a deep understanding of the concepts and practical applications.
-
-## Overview
-Understanding **\$title** is crucial for modern development. It forms the backbone of many professional architectures and workflows.
-
-### Key Concepts
-*   **Fundamentals**: Grasp the core syntax and basic principles.
-*   **Best Practices**: Learn how the industry utilizes these patterns.
-*   **Common Pitfalls**: What to avoid when writing production code.
-
-### Practical Example
-```javascript
-// A simple boilerplate example
-function init() {
-  console.log("Mastering \$title");
-}
-init();
-```
-
-## Summary
-You have now completed the reading for **\$title**. Make sure to practice the concepts and take the quiz to test your knowledge!
-''';
   }
 }
 

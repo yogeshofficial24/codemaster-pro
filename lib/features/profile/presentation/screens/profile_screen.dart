@@ -12,10 +12,14 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userProfileAsync = ref.watch(currentUserProfileProvider);
 
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Developer Portfolio'),
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         elevation: 0,
         actions: [
           IconButton(
@@ -58,7 +62,7 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                         child: CircleAvatar(
                           radius: 60,
-                          backgroundColor: AppColors.surfaceDark,
+                          backgroundColor: colorScheme.surface,
                           backgroundImage: user.profilePicture.isNotEmpty ? NetworkImage(user.profilePicture) : null,
                           child: user.profilePicture.isEmpty ? const Icon(Icons.person, size: 60, color: AppColors.primary) : null,
                         ),
@@ -80,7 +84,7 @@ class ProfileScreen extends ConsumerWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimaryDark,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -98,7 +102,7 @@ class ProfileScreen extends ConsumerWidget {
                 Text(
                   user.email,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppColors.textSecondaryDark, fontSize: 14),
+                  style: TextStyle(color: isDark ? AppColors.textSecondaryDark : Colors.grey[700], fontSize: 14),
                 ),
                 
                 const SizedBox(height: 40),
@@ -106,11 +110,11 @@ class ProfileScreen extends ConsumerWidget {
                 // Professional Stats
                 Row(
                   children: [
-                    Expanded(child: _buildPortfolioStat('Experience', 'Junior')),
-                    Container(width: 1, height: 40, color: Colors.white24),
-                    Expanded(child: _buildPortfolioStat('Projects', '${user.coursesCompleted * 2}')),
-                    Container(width: 1, height: 40, color: Colors.white24),
-                    Expanded(child: _buildPortfolioStat('Commits', '${user.xpEarned}')),
+                    Expanded(child: _buildPortfolioStat(context, 'Experience', 'Junior')),
+                    Container(width: 1, height: 40, color: isDark ? Colors.white24 : Colors.black12),
+                    Expanded(child: _buildPortfolioStat(context, 'Projects', '${user.coursesCompleted * 2}')),
+                    Container(width: 1, height: 40, color: isDark ? Colors.white24 : Colors.black12),
+                    Expanded(child: _buildPortfolioStat(context, 'Commits', '${user.xpEarned}')),
                   ],
                 ),
                 
@@ -136,15 +140,15 @@ class ProfileScreen extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      _buildBadgeCard('Frontend Pro', Icons.web, AppColors.secondary),
+                      _buildBadgeCard(context, 'Frontend Pro', Icons.web, AppColors.secondary),
                       const SizedBox(width: 16),
-                      _buildBadgeCard('Problem Solver', Icons.psychology, AppColors.accent),
+                      _buildBadgeCard(context, 'Problem Solver', Icons.psychology, AppColors.accent),
                       const SizedBox(width: 16),
                       if (user.coursesCompleted > 0)
-                        _buildBadgeCard('Fast Learner', Icons.flash_on, AppColors.warning),
+                        _buildBadgeCard(context, 'Fast Learner', Icons.flash_on, AppColors.warning),
                       const SizedBox(width: 16),
                       if (user.xpEarned > 100)
-                        _buildBadgeCard('Centurion', Icons.military_tech, AppColors.primary),
+                        _buildBadgeCard(context, 'Centurion', Icons.military_tech, AppColors.primary),
                     ],
                   ),
                 ),
@@ -179,12 +183,13 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPortfolioStat(String label, String value) {
+  Widget _buildPortfolioStat(BuildContext context, String label, String value) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
-        Text(value, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+        Text(value, style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: AppColors.textSecondaryDark, fontSize: 13)),
+        Text(label, style: TextStyle(color: isDark ? AppColors.textSecondaryDark : Colors.grey[700], fontSize: 13)),
       ],
     );
   }
@@ -204,20 +209,28 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildBadgeCard(String title, IconData icon, Color color) {
+  Widget _buildBadgeCard(BuildContext context, String title, IconData icon, Color color) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: 120,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surfaceDark,
+        color: isDark ? AppColors.surfaceDark : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withAlpha(50), width: 2),
+        border: Border.all(color: color.withOpacity(0.3), width: 2),
+        boxShadow: isDark ? [] : [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            spreadRadius: 1,
+          )
+        ],
       ),
       child: Column(
         children: [
           Icon(icon, color: color, size: 36),
           const SizedBox(height: 12),
-          Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+          Text(title, textAlign: TextAlign.center, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface)),
         ],
       ),
     );

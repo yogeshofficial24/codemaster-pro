@@ -48,20 +48,23 @@ class _CourseDetailScreenState extends ConsumerState<CourseDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final modulesAsync = ref.watch(modulesProvider(widget.course.id));
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.course.title),
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
       ),
       body: Column(
         children: [
           // Progress Header
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: const BoxDecoration(
-              color: AppColors.surfaceDark,
-              border: Border(bottom: BorderSide(color: Colors.white12)),
+            decoration: BoxDecoration(
+              color: isDark ? AppColors.surfaceDark : Colors.grey[100],
+              border: Border(bottom: BorderSide(color: isDark ? Colors.white12 : Colors.black12)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,14 +72,14 @@ class _CourseDetailScreenState extends ConsumerState<CourseDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Course Progress', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Course Progress', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: colorScheme.onSurface)),
                     Text('$_completedCount / ${widget.course.totalModules} Modules', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 12),
                 LinearProgressIndicator(
                   value: widget.course.totalModules > 0 ? _completedCount / widget.course.totalModules : 0,
-                  backgroundColor: Colors.white12,
+                  backgroundColor: isDark ? Colors.white12 : Colors.grey[300],
                   color: AppColors.success,
                   minHeight: 8,
                   borderRadius: BorderRadius.circular(4),
@@ -88,10 +91,10 @@ class _CourseDetailScreenState extends ConsumerState<CourseDetailScreen> {
           Expanded(
             child: modulesAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, stack) => Center(child: Text('Error: $err')),
+              error: (err, stack) => Center(child: Text('Error: $err', style: TextStyle(color: colorScheme.onSurface))),
               data: (modules) {
                 if (modules.isEmpty) {
-                  return const Center(child: Text('No modules added yet.'));
+                  return Center(child: Text('No modules added yet.', style: TextStyle(color: colorScheme.onSurface)));
                 }
 
                 return ListView.builder(
@@ -102,16 +105,19 @@ class _CourseDetailScreenState extends ConsumerState<CourseDetailScreen> {
                     final topicsAsync = ref.watch(topicsProvider('${widget.course.id}::${module.id}'));
                     
                     return Card(
+                      color: colorScheme.surface,
                       margin: const EdgeInsets.only(bottom: 16),
                       child: ExpansionTile(
-                        title: Text(module.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(module.description),
+                        title: Text(module.title, style: TextStyle(fontWeight: FontWeight.bold, color: colorScheme.onSurface)),
+                        subtitle: Text(module.description, style: TextStyle(color: isDark ? Colors.grey[400] : Colors.grey[600])),
+                        iconColor: colorScheme.primary,
+                        collapsedIconColor: colorScheme.onSurface,
                         children: topicsAsync.when(
                           loading: () => [const Padding(padding: EdgeInsets.all(16.0), child: CircularProgressIndicator())],
-                          error: (e, s) => [Padding(padding: const EdgeInsets.all(16.0), child: Text('Error: $e'))],
+                          error: (e, s) => [Padding(padding: const EdgeInsets.all(16.0), child: Text('Error: $e', style: TextStyle(color: colorScheme.onSurface)))],
                           data: (topics) {
                             if (topics.isEmpty) {
-                              return [const Padding(padding: EdgeInsets.all(16.0), child: Text('No topics yet.'))];
+                              return [Padding(padding: const EdgeInsets.all(16.0), child: Text('No topics yet.', style: TextStyle(color: colorScheme.onSurface)))];
                             }
                             return topics.map((topic) {
                               return FutureBuilder<bool>(
@@ -127,10 +133,10 @@ class _CourseDetailScreenState extends ConsumerState<CourseDetailScreen> {
                                       topic.title,
                                       style: TextStyle(
                                         decoration: isDone ? TextDecoration.lineThrough : null,
-                                        color: isDone ? Colors.grey : Colors.white,
+                                        color: isDone ? Colors.grey : colorScheme.onSurface,
                                       ),
                                     ),
-                                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                                    trailing: Icon(Icons.arrow_forward_ios, size: 16, color: colorScheme.onSurface.withOpacity(0.5)),
                                     onTap: () async {
                                       await Navigator.push(
                                         context,

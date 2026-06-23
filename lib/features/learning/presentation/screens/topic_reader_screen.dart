@@ -14,10 +14,14 @@ class TopicReaderScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(topic.title),
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
         actions: [
           IconButton(
             icon: const Icon(Icons.check_circle_outline),
@@ -41,14 +45,15 @@ class TopicReaderScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         styleSheet: MarkdownStyleSheet(
           h1: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary),
-          h2: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-          p: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5, color: Colors.grey[300]),
-          code: const TextStyle(
+          h2: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+          p: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5, color: isDark ? Colors.grey[300] : Colors.grey[800]),
+          code: TextStyle(
             fontFamily: 'monospace',
-            backgroundColor: Color(0x336C63FF),
+            backgroundColor: colorScheme.primary.withOpacity(0.1),
+            color: isDark ? Colors.pinkAccent : Colors.pink,
           ),
           codeblockDecoration: BoxDecoration(
-            color: const Color(0xFF1E293B),
+            color: isDark ? const Color(0xFF1E293B) : Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
         ),

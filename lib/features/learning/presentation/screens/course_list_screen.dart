@@ -96,7 +96,7 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
                             const SizedBox(height: 16),
                             LinearProgressIndicator(
                               value: progress,
-                              backgroundColor: Colors.white12,
+                              backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.white12 : Colors.grey[300],
                               color: progress >= 1.0 ? AppColors.success : AppColors.primary,
                               minHeight: 6,
                               borderRadius: BorderRadius.circular(4),
