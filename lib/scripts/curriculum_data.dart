@@ -61,10 +61,16 @@ class CurriculumData {
       'category': 'Database',
       'desc': 'Relational databases and queries.',
       'modules': [
-        'Database Basics', 'Installation', 'Database Creation', 'Tables',
-        'Data Types', 'Insert', 'Update', 'Delete', 'Select', 'Where Clause',
-        'Order By', 'Group By', 'Joins', 'Views', 'Stored Procedures',
-        'Triggers', 'Indexing', 'Optimization', 'Backup', 'ERP Database Project'
+        'Introduction to Databases', 'Installing MySQL', 'Creating Databases', 'Tables', 'MySQL Data Types',
+        'Insert Data', 'Select Data', 'Filtering Records', 'Sorting Data', 'Update Records',
+        'Delete Records', 'Aggregate Functions', 'GROUP BY', 'HAVING Clause', 'Joins Introduction',
+        'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'SELF JOIN', 'UNION',
+        'Primary Keys', 'Foreign Keys', 'One-to-One Relationships', 'One-to-Many Relationships', 'Many-to-Many Relationships',
+        'Normalization', 'Indexes', 'Views', 'Stored Procedures', 'Triggers',
+        'Transactions', 'ACID Properties', 'Database Security', 'Backup & Restore', 'Query Optimization',
+        'Database Design', 'MySQL with PHP', 'MySQL with Laravel', 'MySQL with WordPress', 'MySQL for Large Applications',
+        'Database Replication', 'Database Partitioning', 'Sharding Concepts', 'High Availability', 'Performance Monitoring',
+        'Data Warehousing Concepts', 'ETL Concepts', 'MySQL Architecture', 'MySQL Internals', 'Enterprise Database Design'
       ]
     },
     {
