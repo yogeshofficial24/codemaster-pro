@@ -6,7 +6,8 @@ import 'package:codemaster_pro/features/ai_assistant/providers/ai_repository.dar
 import 'package:codemaster_pro/core/widgets/glassmorphism_card.dart';
 
 class AIInterviewScreen extends ConsumerStatefulWidget {
-  const AIInterviewScreen({super.key});
+  final String? topic;
+  const AIInterviewScreen({super.key, this.topic});
 
   @override
   ConsumerState<AIInterviewScreen> createState() => _AIInterviewScreenState();
@@ -34,7 +35,8 @@ class _AIInterviewScreenState extends ConsumerState<AIInterviewScreen> {
     });
 
     final aiRepo = ref.read(aiRepositoryProvider);
-    final question = await aiRepo.getInterviewQuestion(_selectedTopic, _selectedDifficulty);
+    final topicToUse = widget.topic ?? _selectedTopic;
+    final question = await aiRepo.getInterviewQuestion(topicToUse, _selectedDifficulty);
 
     if (mounted) {
       setState(() {
@@ -84,15 +86,17 @@ class _AIInterviewScreenState extends ConsumerState<AIInterviewScreen> {
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedTopic,
-                          decoration: const InputDecoration(labelText: 'Topic', filled: true),
-                          items: _topics.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
-                          onChanged: (val) => setState(() => _selectedTopic = val!),
+                      if (widget.topic == null)
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedTopic,
+                            decoration: const InputDecoration(labelText: 'Topic', filled: true),
+                            items: _topics.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
+                            onChanged: (val) => setState(() => _selectedTopic = val!),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
+                      if (widget.topic == null)
+                        const SizedBox(width: 16),
                       Expanded(
                         child: DropdownButtonFormField<String>(
                           value: _selectedDifficulty,

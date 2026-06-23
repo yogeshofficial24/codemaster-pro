@@ -4,6 +4,7 @@ import 'package:codemaster_pro/features/learning/presentation/screens/course_lis
 import 'package:codemaster_pro/features/ai_assistant/presentation/screens/ai_chat_screen.dart';
 import 'package:codemaster_pro/features/practice/presentation/screens/practice_dashboard_screen.dart';
 import 'package:codemaster_pro/features/profile/presentation/screens/profile_screen.dart';
+import 'package:codemaster_pro/services/update_service.dart';
 import 'dashboard_screen.dart';
 
 class RootScreen extends StatefulWidget {
@@ -15,6 +16,14 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      UpdateService.checkForUpdates(context);
+    });
+  }
 
   final List<Widget> _screens = [
     const DashboardScreen(),

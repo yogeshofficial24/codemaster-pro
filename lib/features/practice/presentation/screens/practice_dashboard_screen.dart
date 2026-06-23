@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/core/widgets/glassmorphism_card.dart';
 import 'package:codemaster_pro/features/practice/presentation/screens/quiz_list_screen.dart';
-import 'package:codemaster_pro/features/ai_assistant/presentation/screens/ai_interview_screen.dart';
+import 'package:codemaster_pro/features/practice/presentation/screens/interview_subject_list_screen.dart';
 import 'package:codemaster_pro/features/practice/presentation/screens/code_editor_screen.dart';
 
 class PracticeDashboardScreen extends StatelessWidget {
@@ -48,7 +48,7 @@ class PracticeDashboardScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const AIInterviewScreen()),
+                  MaterialPageRoute(builder: (_) => const InterviewSubjectListScreen()),
                 );
               },
             ),

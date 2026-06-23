@@ -19,49 +19,6 @@ class SettingsScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildSectionHeader('Account'),
-          ListTile(
-            leading: const Icon(Icons.person_outline),
-            title: const Text('Edit Profile'),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit Profile coming soon')));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.notifications_outlined),
-            title: const Text('Notifications'),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {},
-          ),
-          const Divider(height: 32),
-          _buildSectionHeader('Preferences'),
-          ListTile(
-            leading: const Icon(Icons.dark_mode_outlined),
-            title: const Text('Dark Mode'),
-            trailing: Switch(
-              value: true,
-              onChanged: (val) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Light mode coming soon')));
-              },
-              activeColor: AppColors.primary,
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.key),
-            title: const Text('Set Gemini API Key'),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
-              _showApiKeyDialog(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.language),
-            title: const Text('Language'),
-            trailing: const Text('English', style: TextStyle(color: Colors.grey)),
-            onTap: () {},
-          ),
-          const Divider(height: 32),
           _buildSectionHeader('About'),
           ListTile(
             leading: const Icon(Icons.info_outline),
@@ -129,40 +86,4 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  void _showApiKeyDialog(BuildContext context) {
-    final TextEditingController _keyController = TextEditingController();
-    
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: AppColors.backgroundDark,
-          title: const Text('Gemini API Key'),
-          content: TextField(
-            controller: _keyController,
-            decoration: const InputDecoration(
-              hintText: 'Paste API Key here...',
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setString('gemini_api_key', _keyController.text);
-                if (context.mounted) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('API Key Saved!')));
-                }
-              },
-              child: const Text('Save'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }

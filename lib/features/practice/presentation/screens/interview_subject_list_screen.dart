@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:codemaster_pro/features/learning/providers/course_repository.dart';
-import 'package:codemaster_pro/features/practice/presentation/screens/dynamic_quiz_screen.dart';
+import 'package:codemaster_pro/features/ai_assistant/presentation/screens/ai_interview_screen.dart';
 
-class QuizListScreen extends ConsumerWidget {
-  const QuizListScreen({super.key});
+class InterviewSubjectListScreen extends ConsumerWidget {
+  const InterviewSubjectListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,12 +13,12 @@ class QuizListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Subject for Quiz'),
+        title: const Text('Select Interview Subject'),
         backgroundColor: AppColors.backgroundDark,
       ),
       body: coursesAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err')),
+        error: (err, stack) => Center(child: Text('Error: \$err')),
         data: (courses) {
           if (courses.isEmpty) {
             return const Center(child: Text('Please go to Settings and Seed Database first.'));
@@ -36,15 +35,15 @@ class QuizListScreen extends ConsumerWidget {
                   contentPadding: const EdgeInsets.all(16),
                   leading: CircleAvatar(
                     backgroundColor: AppColors.primary.withAlpha(50),
-                    child: const Icon(Icons.code, color: AppColors.primary),
+                    child: const Icon(Icons.psychology, color: AppColors.primary),
                   ),
                   title: Text(course.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  subtitle: Text('Generate an AI-powered 10-question quiz for ${course.title}'),
+                  subtitle: Text('Start a Mock Technical Interview for \${course.title}'),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => DynamicQuizScreen(course: course),
+                        builder: (_) => AIInterviewScreen(topic: course.title),
                       ),
                     );
                   },

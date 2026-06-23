@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/features/learning/providers/course_repository.dart';
+import 'package:codemaster_pro/scripts/database_seeder.dart';
 import 'course_detail_screen.dart';
 
 class CourseListScreen extends ConsumerWidget {
@@ -20,7 +21,27 @@ class CourseListScreen extends ConsumerWidget {
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (courses) {
           if (courses.isEmpty) {
-            return const Center(child: Text('No courses available yet.'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Database is clean. No courses available locally.'),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Downloading 26 Courses... Please wait!')));
+                      await DatabaseSeeder.seedData();
+                    },
+                    icon: const Icon(Icons.cloud_download),
+                    label: const Text('Download Master Curriculum'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            );
           }
 
           return ListView.builder(

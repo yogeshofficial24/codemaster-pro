@@ -80,7 +80,7 @@ class DashboardScreen extends ConsumerWidget {
                 const Icon(Icons.local_fire_department, color: Colors.orange, size: 32),
                 const SizedBox(height: 8),
                 const Text('Streak', style: TextStyle(fontWeight: FontWeight.w600)),
-                Text('15 Days', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const Text('0 Days', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -106,13 +106,13 @@ class DashboardScreen extends ConsumerWidget {
   Widget _buildLearningStats() {
     return Column(
       children: [
-        _buildStatRow('Languages Started', '4', Colors.blue),
+        _buildStatRow('Languages Started', '0', Colors.blue),
         const SizedBox(height: 12),
-        _buildStatRow('Courses Completed', '8', Colors.green),
+        _buildStatRow('Courses Completed', '0', Colors.green),
         const SizedBox(height: 12),
-        _buildStatRow('Challenges Solved', '42', Colors.purple),
+        _buildStatRow('Challenges Solved', '0', Colors.purple),
         const SizedBox(height: 12),
-        _buildStatRow('Interview Readiness', '72%', Colors.teal),
+        _buildStatRow('Interview Readiness', '0%', Colors.teal),
       ],
     );
   }
