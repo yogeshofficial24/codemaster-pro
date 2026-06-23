@@ -6,11 +6,16 @@ class CurriculumData {
       'category': 'Frontend',
       'desc': 'From basics to advanced HTML5 features.',
       'modules': [
-        'Introduction to HTML', 'HTML Structure', 'Headings', 'Paragraphs',
-        'Formatting Tags', 'Links', 'Images', 'Lists', 'Tables', 'Forms',
-        'Input Types', 'Semantic Elements', 'Audio & Video', 'Iframes',
-        'Meta Tags', 'HTML5 Features', 'Accessibility', 'SEO Basics',
-        'Responsive HTML', 'Portfolio Project'
+        'Introduction to HTML', 'HTML Document Structure', 'HTML Elements', 'Headings', 'Paragraphs',
+        'Text Formatting', 'Comments', 'Links', 'Images', 'Lists',
+        'Tables', 'Forms Introduction', 'Input Elements', 'Advanced Inputs', 'Radio Buttons & Checkboxes',
+        'Select Dropdown', 'Textarea', 'Buttons', 'Form Validation', 'Complete Registration Form Project',
+        'Semantic HTML', 'Audio Elements', 'Video Elements', 'Iframes', 'Meta Tags',
+        'HTML Entities', 'SVG Basics', 'Canvas Basics', 'Accessibility (A11Y)', 'SEO Friendly HTML',
+        'Responsive HTML Structure', 'HTML for WordPress Development', 'HTML Email Templates', 'Schema Markup', 'Open Graph Tags',
+        'Microdata', 'Performance Optimization', 'Security Best Practices', 'HTML Architecture for Large Projects', 'Enterprise Website Structure',
+        'HTML5 APIs Overview', 'Drag and Drop API', 'Geolocation API', 'Web Storage API', 'Offline Applications',
+        'Progressive Web App Foundations', 'Browser Rendering Concepts', 'Advanced Accessibility', 'HTML Standards & Specifications', 'Future of HTML'
       ]
     },
     {
