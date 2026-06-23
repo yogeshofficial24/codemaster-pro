@@ -11,7 +11,11 @@ class DatabaseSeeder {
 
     debugPrint("Clearing old data...");
     
-    debugPrint("Seeding ${CurriculumData.masterCourses.length} Master Courses...");
+    debugPrint("Seeding \${CurriculumData.masterCourses.length} Master Courses...");
+
+    // Use WriteBatch to drastically speed up 1500+ writes
+    WriteBatch batch = firestore.batch();
+    int operationCount = 0;
 
     for (var courseMap in CurriculumData.masterCourses) {
       final String cId = courseMap['id'];
@@ -19,41 +23,42 @@ class DatabaseSeeder {
       final List<String> moduleNames = courseMap['modules'] as List<String>;
 
       final courseRef = firestore.collection('courses').doc(cId);
-      await courseRef.set(CourseModel(
+      batch.set(courseRef, CourseModel(
         id: cId,
         title: courseMap['title'],
         description: courseMap['desc'],
         category: courseMap['category'],
         totalModules: moduleNames.length,
       ).toMap());
+      operationCount++;
 
       int modIndex = 1;
       for (var modName in moduleNames) {
-        final String mId = 'mod_$modIndex';
+        final String mId = 'mod_\$modIndex';
         final modRef = courseRef.collection('modules').doc(mId);
         
-        await modRef.set(ModuleModel(
+        batch.set(modRef, ModuleModel(
           id: mId,
           courseId: cId,
           title: modName,
-          description: "Master ${courseMap['title']} concepts focusing on $modName.",
+          description: "Master \${courseMap['title']} concepts focusing on \$modName.",
           orderIndex: modIndex,
-          totalTopics: 3, // 3 standard AI generated topics per module
+          totalTopics: 3, 
         ).toMap());
+        operationCount++;
 
-        // We automatically generate 3 sub-topics per module for the AI to elaborate on
         final standardTopics = [
-          'Theory & Fundamentals of $modName',
-          'Code Examples & Patterns for $modName',
-          'Advanced Use Cases for $modName',
+          'Theory & Fundamentals of \$modName',
+          'Code Examples & Patterns for \$modName',
+          'Advanced Use Cases for \$modName',
         ];
 
         int topIndex = 1;
         for (var topicTitle in standardTopics) {
-          final String tId = 't_$topIndex';
+          final String tId = 't_\$topIndex';
           final topRef = modRef.collection('topics').doc(tId);
           
-          await topRef.set(TopicModel(
+          batch.set(topRef, TopicModel(
             id: tId,
             moduleId: mId,
             title: topicTitle,
@@ -61,12 +66,25 @@ class DatabaseSeeder {
             orderIndex: topIndex,
             xpReward: 20 + (modIndex * 5),
           ).toMap());
+          operationCount++;
+
+          // Commit batch if we reach the 500 operation limit
+          if (operationCount >= 450) {
+            await batch.commit();
+            batch = firestore.batch();
+            operationCount = 0;
+          }
           topIndex++;
         }
         modIndex++;
       }
     }
     
-    debugPrint("Finished Seeding Master Database with ${CurriculumData.masterCourses.length} Languages!");
+    // Commit any remaining operations
+    if (operationCount > 0) {
+      await batch.commit();
+    }
+    
+    debugPrint("Finished Seeding Master Database with \${CurriculumData.masterCourses.length} Languages!");
   }
 }
