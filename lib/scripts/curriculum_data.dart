@@ -108,10 +108,16 @@ class CurriculumData {
       'category': 'Version Control',
       'desc': 'Industry standard version control.',
       'modules': [
-        'Version Control', 'Git Installation', 'Repository', 'Commit', 'Push',
-        'Pull', 'Branching', 'Merge', 'Conflict Resolution', 'GitHub Workflow',
-        'Pull Requests', 'Open Source Contribution', 'GitHub Actions', 'CI/CD',
-        'Team Collaboration'
+        'Introduction to Version Control', 'Installing Git', 'Git Configuration', 'Creating a Repository', 'Git Status',
+        'Staging Files', 'Committing Changes', 'Viewing History', 'Ignoring Files', 'Undo Changes',
+        'Git Branching', 'Creating Branches', 'Merging Branches', 'Merge Conflicts', 'Git Stash',
+        'Tags', 'Git Rebase', 'Cherry Pick', 'Git Aliases', 'Git Workflow',
+        'GitHub Introduction', 'Creating GitHub Repository', 'Connecting Git to GitHub', 'Pushing Code', 'Pulling Changes',
+        'Forking Repositories', 'Pull Requests', 'Issues', 'GitHub Discussions', 'GitHub Projects',
+        'GitHub Actions', 'GitHub Pages', 'Secrets Management', 'Branch Protection Rules', 'Code Reviews',
+        'Advanced Pull Requests', 'Monorepo Concepts', 'Open Source Contribution Workflow', 'Release Management', 'GitHub Enterprise Concepts',
+        'Advanced Git Internals', 'Git Object Model', 'Git Hooks', 'Advanced Rebase Strategies', 'Git Bisect',
+        'Repository Optimization', 'Enterprise Workflows', 'DevOps Integration', 'Large Team Collaboration', 'Git Best Practices at Scale'
       ]
     },
     {
