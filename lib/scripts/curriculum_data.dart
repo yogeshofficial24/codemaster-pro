@@ -43,10 +43,16 @@ class CurriculumData {
       'category': 'Backend',
       'desc': 'Server-side logic and database connectivity.',
       'modules': [
-        'PHP Introduction', 'Installation', 'Syntax', 'Variables', 'Data Types',
-        'Operators', 'Conditions', 'Loops', 'Functions', 'Arrays', 'Forms',
-        'Sessions', 'Cookies', 'File Handling', 'OOP', 'MySQL Integration',
-        'CRUD Operations', 'Authentication', 'API Development', 'ERP Project'
+        'Introduction to PHP', 'PHP Installation & Setup', 'PHP Syntax', 'Variables', 'Data Types',
+        'Constants', 'Operators', 'Input & Output', 'Conditional Statements', 'Loops',
+        'Functions', 'Arrays', 'String Functions', 'Date & Time', 'Forms Handling',
+        'Sessions', 'Cookies', 'File Handling', 'File Upload', 'Error Handling',
+        'Object Oriented Programming', 'Constructors & Destructors', 'Inheritance', 'Encapsulation', 'Polymorphism',
+        'Abstraction', 'Interfaces', 'Traits', 'Namespaces', 'Exception Handling',
+        'MySQL Introduction', 'Database Connection', 'CRUD Operations', 'Prepared Statements', 'Transactions',
+        'Authentication System', 'Authorization', 'REST API Development', 'JWT Authentication', 'Email Integration',
+        'MVC Architecture', 'Composer', 'Laravel Introduction', 'Laravel Eloquent', 'Middleware',
+        'Authentication in Laravel', 'REST API with Laravel', 'Testing', 'Security Best Practices', 'Deployment'
       ]
     },
     {
