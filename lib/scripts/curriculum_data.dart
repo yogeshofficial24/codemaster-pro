@@ -103,10 +103,16 @@ class CurriculumData {
       'category': 'CMS',
       'desc': 'World\'s most popular CMS.',
       'modules': [
-        'WordPress Introduction', 'Installation', 'Dashboard', 'Themes', 'Plugins',
-        'Pages', 'Posts', 'Menus', 'Widgets', 'Elementor', 'WooCommerce',
-        'Product Management', 'SEO', 'Security', 'Speed Optimization', 'Backups',
-        'Custom Post Types', 'Theme Development', 'Plugin Development', 'Ecommerce Store Project'
+        'Introduction to WordPress', 'Domain & Hosting Basics', 'WordPress Installation', 'WordPress Dashboard', 'Pages and Posts',
+        'Media Library', 'Menus', 'Widgets', 'Users & Roles', 'Theme Installation',
+        'Elementor Introduction', 'Advanced Elementor', 'Theme Customization', 'Essential Plugins', 'Forms',
+        'SEO Fundamentals', 'Security Basics', 'Website Backup', 'Performance Optimization', 'Responsive Design',
+        'WooCommerce Introduction', 'Product Management', 'Payment Gateways', 'Shipping Configuration', 'Coupon Systems',
+        'WooCommerce Customization', 'Custom Post Types', 'Custom Taxonomies', 'Membership Websites', 'LMS Websites',
+        'WordPress Database Structure', 'Theme Development', 'Child Themes', 'Plugin Development', 'Actions & Filters',
+        'REST API', 'Custom Gutenberg Blocks', 'Headless WordPress', 'Multisite', 'Enterprise WordPress',
+        'Advanced Security', 'Server Optimization', 'Advanced WooCommerce Development', 'Custom API Integrations', 'Webhooks',
+        'Performance Tuning', 'WordPress Architecture', 'Enterprise Deployments', 'DevOps for WordPress', 'Large Scale WordPress Systems'
       ]
     },
     {
