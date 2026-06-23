@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/core/widgets/glassmorphism_card.dart';
 import 'package:codemaster_pro/features/practice/presentation/screens/quiz_list_screen.dart';
-import 'package:codemaster_pro/features/practice/presentation/screens/interview_subject_list_screen.dart';
+
 import 'package:codemaster_pro/features/practice/presentation/screens/code_editor_screen.dart';
 
 class PracticeDashboardScreen extends StatelessWidget {
@@ -38,20 +38,7 @@ class PracticeDashboardScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 16),
-            _buildActionCard(
-              context,
-              title: 'AI Mock Interviews',
-              description: 'Engage in a simulated technical interview with our AI Coach. Get instant evaluations.',
-              icon: Icons.psychology,
-              color: Colors.purpleAccent,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const InterviewSubjectListScreen()),
-                );
-              },
-            ),
+
             const SizedBox(height: 16),
             _buildActionCard(
               context,

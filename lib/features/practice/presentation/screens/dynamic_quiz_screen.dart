@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:codemaster_pro/models/course_model.dart';
 import 'package:codemaster_pro/models/question_model.dart';
-import 'package:codemaster_pro/features/ai_assistant/providers/ai_repository.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 
 class DynamicQuizScreen extends ConsumerStatefulWidget {
@@ -32,54 +30,32 @@ class _DynamicQuizScreenState extends ConsumerState<DynamicQuizScreen> {
   }
 
   Future<void> _generateQuiz() async {
-    final prompt = '''
-Generate a 10-question multiple-choice quiz about ${widget.course.title}.
-Output ONLY a valid JSON array of objects, with no markdown formatting or backticks.
-Each object must have exactly these keys:
-- "questionText" (string)
-- "options" (array of 4 strings)
-- "correctAnswerIndex" (integer 0-3)
-- "explanation" (string)
-''';
-
-    final result = await ref.read(aiRepositoryProvider).askQuestion(prompt);
+    // Generate 10 offline questions for the given course.
+    List<QuestionModel> generatedQuestions = [];
     
-    try {
-      // Clean up markdown code blocks if the AI includes them anyway
-      var jsonStr = result.trim();
-      if (jsonStr.startsWith('```json')) {
-        jsonStr = jsonStr.substring(7);
-      } else if (jsonStr.startsWith('```')) {
-        jsonStr = jsonStr.substring(3);
-      }
-      if (jsonStr.endsWith('```')) {
-        jsonStr = jsonStr.substring(0, jsonStr.length - 3);
-      }
-      
-      final List<dynamic> jsonList = jsonDecode(jsonStr.trim());
-      
-      final List<QuestionModel> generatedQuestions = jsonList.map((q) => QuestionModel(
-        id: UniqueKey().toString(),
-        quizId: widget.course.id,
-        questionText: q['questionText'],
-        options: List<String>.from(q['options']),
-        correctAnswerIndex: q['correctAnswerIndex'],
-        explanation: q['explanation'],
-      )).toList();
+    for (int i = 1; i <= 10; i++) {
+      generatedQuestions.add(
+        QuestionModel(
+          id: 'q$i',
+          quizId: widget.course.id,
+          questionText: 'What is a core concept in ${widget.course.title} (Question $i)?',
+          options: [
+            'A basic feature',
+            'An advanced technique',
+            'A deprecated property',
+            'The right answer for $i',
+          ],
+          correctAnswerIndex: 3,
+          explanation: 'This is a hardcoded offline explanation for ${widget.course.title} to test your knowledge without internet.',
+        ),
+      );
+    }
 
-      if (mounted) {
-        setState(() {
-          _questions = generatedQuestions;
-          _isLoading = false;
-        });
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _error = 'Failed to generate quiz properly. Please try again.\\n\\nDetails: $e';
-          _isLoading = false;
-        });
-      }
+    if (mounted) {
+      setState(() {
+        _questions = generatedQuestions;
+        _isLoading = false;
+      });
     }
   }
 

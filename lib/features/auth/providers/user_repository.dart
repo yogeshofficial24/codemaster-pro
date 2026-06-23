@@ -1,23 +1,47 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/user_model.dart';
 
-final userRepositoryProvider = Provider((ref) => UserRepository(FirebaseFirestore.instance));
+final userRepositoryProvider = Provider((ref) => UserRepository());
 
 class UserRepository {
-  final FirebaseFirestore _firestore;
-
-  UserRepository(this._firestore);
+  static const _userKey = 'local_user_profile';
 
   Future<void> saveUserProfile(UserModel user) async {
-    await _firestore.collection('users').doc(user.uid).set(user.toMap(), SetOptions(merge: true));
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_userKey, jsonEncode(user.toMap()));
   }
 
   Future<UserModel?> getUserProfile(String uid) async {
-    final doc = await _firestore.collection('users').doc(uid).get();
-    if (doc.exists && doc.data() != null) {
-      return UserModel.fromMap(doc.data()!);
+    final prefs = await SharedPreferences.getInstance();
+    final userString = prefs.getString(_userKey);
+    if (userString != null) {
+      final map = jsonDecode(userString) as Map<String, dynamic>;
+      return UserModel.fromMap(map);
     }
-    return null;
+    
+    // Return a default local user if none exists
+    return UserModel(
+      uid: 'local_user',
+      email: 'developer@codemaster.app',
+      fullName: 'Developer',
+    );
+  }
+
+  Future<void> addXP(int amount) async {
+    final user = await getUserProfile('local_user');
+    if (user != null) {
+      final updatedUser = user.copyWith(xpEarned: user.xpEarned + amount);
+      await saveUserProfile(updatedUser);
+    }
+  }
+
+  Future<void> incrementCourseCompleted() async {
+    final user = await getUserProfile('local_user');
+    if (user != null) {
+      final updatedUser = user.copyWith(coursesCompleted: user.coursesCompleted + 1);
+      await saveUserProfile(updatedUser);
+    }
   }
 }

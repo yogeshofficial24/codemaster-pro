@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/features/learning/presentation/screens/course_list_screen.dart';
-import 'package:codemaster_pro/features/ai_assistant/presentation/screens/ai_chat_screen.dart';
 import 'package:codemaster_pro/features/practice/presentation/screens/practice_dashboard_screen.dart';
 import 'package:codemaster_pro/features/profile/presentation/screens/profile_screen.dart';
 import 'package:codemaster_pro/services/update_service.dart';
@@ -28,7 +27,6 @@ class _RootScreenState extends State<RootScreen> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const CourseListScreen(),
-    const AIChatScreen(),
     const PracticeDashboardScreen(),
     const ProfileScreen(),
   ];
@@ -50,7 +48,6 @@ class _RootScreenState extends State<RootScreen> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.dashboard_outlined), selectedIcon: Icon(Icons.dashboard), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.book_outlined), selectedIcon: Icon(Icons.book), label: 'Learn'),
-          NavigationDestination(icon: Icon(Icons.smart_toy_outlined), selectedIcon: Icon(Icons.smart_toy), label: 'AI Coach'),
           NavigationDestination(icon: Icon(Icons.code_outlined), selectedIcon: Icon(Icons.code), label: 'Practice'),
           NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profile'),
         ],
@@ -58,3 +55,4 @@ class _RootScreenState extends State<RootScreen> {
     );
   }
 }
+

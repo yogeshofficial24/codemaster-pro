@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:codemaster_pro/core/theme/app_colors.dart';
 import 'package:codemaster_pro/features/auth/providers/auth_controller.dart';
 import 'package:codemaster_pro/features/auth/presentation/screens/login_screen.dart';
-import 'package:codemaster_pro/scripts/database_seeder.dart';
+
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -31,24 +31,7 @@ class SettingsScreen extends ConsumerWidget {
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {},
           ),
-          const SizedBox(height: 32),
-          ElevatedButton.icon(
-            onPressed: () async {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Seeding Database...')));
-              await DatabaseSeeder.seedData();
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Database Seeded Successfully!')));
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.withAlpha(50),
-              foregroundColor: Colors.green,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
-            icon: const Icon(Icons.cloud_upload),
-            label: const Text('Seed Database (Dev Only)'),
-          ),
-          const SizedBox(height: 16),
+
           ElevatedButton.icon(
             onPressed: () async {
               await ref.read(authControllerProvider.notifier).signOut();
